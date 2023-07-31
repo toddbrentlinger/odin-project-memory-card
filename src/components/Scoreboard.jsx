@@ -1,6 +1,6 @@
 function Scoreboard({ scoreCurrent, scoreBest }) {
     return (
-        <section id="scoreboard">
+        <div id="scoreboard">
             <div className="score-container">
                 <div>Current Score</div>
                 <div id="current-score">{ scoreCurrent }</div>
@@ -10,7 +10,7 @@ function Scoreboard({ scoreCurrent, scoreBest }) {
                 <div>Best Score</div>
                 <div id="best-score">{ scoreBest }</div>
             </div>
-        </section>
+        </div>
     );
 }
 

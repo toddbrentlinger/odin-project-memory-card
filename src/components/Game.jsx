@@ -66,14 +66,18 @@ function Game() {
     const renderGame = () => {
         return (
             <>
-                <Scoreboard 
-                    scoreCurrent={score} 
-                    scoreBest={scoreBest}
-                />
-                <div id="round-container">
-                    <span>Round: </span>
-                    <span id="round-number">{`${round} of ${game.roundMax}`}</span>
-                </div>
+                <section id="scoreboard-round-outer">
+                    <div id="scoreboard-round-inner">
+                        <Scoreboard 
+                            scoreCurrent={score} 
+                            scoreBest={scoreBest}
+                        />
+                        <div id="round-container">
+                            <span>Round: </span>
+                            <span id="round-number">{`${round} of ${game.roundMax}`}</span>
+                        </div>
+                    </div>
+                </section>
                 <Round 
                     cardsInRound={cardsInRound} 
                     handleSelectCard={handleSelectCard}
