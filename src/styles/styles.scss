@@ -182,15 +182,6 @@ h1, h2, h3 {
     justify-content: center;
 }
 
-@keyframes spin-card {
-    from {
-        transform: rotateY(180deg);
-    }
-    to {
-        transform: rotateY(0deg);
-    }
-}
-
 .memory-card {
     position: relative;
     width: 20%;
@@ -200,7 +191,6 @@ h1, h2, h3 {
     justify-items: center;
     align-items: center;
     transform-style: preserve-3d;
-    animation: 1s ease-in-out spin-card;
 
     &:hover, &:focus {
         .memory-card-img {
@@ -216,7 +206,7 @@ h1, h2, h3 {
         object-fit: cover;
         object-position: top;
         border-radius: 15%;
-        transition: all 150ms ease-in-out;
+        transition: all 150ms ease-in-out; // transitions size on hover or focus
         backface-visibility: hidden;
     }
 
