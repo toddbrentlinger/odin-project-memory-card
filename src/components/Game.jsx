@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import GameOverMessage from "./GameOverMessage";
 import Round from "./Round";
 import Scoreboard from "./Scoreboard";
+import Loading from "./Loading";
 import game, { GameState } from "../memory_card_game/game.js";
 
 function Game() {
-    const [characterData, setCharacterData] = useState([]);
     const [scoreBest, setScoreBest] = useState(Number(localStorage.getItem('scoreBest')) || 0);
     const [score, setScore] = useState(0);
     const [round, setRound] = useState(1);
     const [cardsInRound, setCardsInRound] = useState([]);
     const [isGameOver, setIsGameOver] = useState(false);
     const [gameState, setGameState] = useState(GameState.PLAYING);
-
-    const isLoading = characterData.length === 0;
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://hp-api.onrender.com/api/characters')
@@ -24,7 +23,7 @@ function Game() {
 
                 game.init(data);
                 createNewGame();
-                setCharacterData(data);
+                setIsLoading(false);
             });
     }, []);
 
@@ -45,6 +44,11 @@ function Game() {
 
     const handleSelectCard = (selectedCardId) => {
         game.selectCard(selectedCardId);
+
+        // Remove focus of selected element (focus remains after re-render)
+        if (document.activeElement) {
+            document.activeElement.blur();
+        }
         
         switch(game.gameState) {
             case GameState.LOST:
@@ -99,8 +103,10 @@ function Game() {
 
     return (
         <div id="memory-card-game-container">
-            { isLoading ? 'Loading...' : 'Finished Loading' }
-            { isGameOver ? renderGameOver() : renderGame() }
+            { 
+                isLoading ? <Loading /> :  
+                    isGameOver ? renderGameOver() : renderGame()
+            }
         </div>
     );
 }
